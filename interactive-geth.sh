@@ -21,7 +21,7 @@ geth --datadir . account new
 # 3)listing the accounts
 geth --datadir . account list
 
-# 4) starting the blockchain *on a new terminal*
+# 4) starting the blockchain with a single node[NODE-1] *on a new terminal*
 gnome-terminal --command="bash -c 'geth --networkid 4224 --mine --minerthreads 1 --datadir . --nodiscover --rpc --rpcport "8545" --port "30303" --rpccorsdomain "*" --nat "any" --rpcapi eth,web3,personal,net --unlock 0 --password ./password.sec --ipcpath "./ethereum/geth.ipc"; $SHELL'"
 
 # 5) connect to this geth node initialized
@@ -54,3 +54,10 @@ geth attach ipc:./geth.ipc console
 
 # 12) check the balance of account[1]
 ## web3.fromWei(eth.getBalance(eth.accounts[1]), "ether")
+
+# 13) create another node sharing the same genesis, 
+# open the port to connect with existing nodes on the blockchain
+# thus creating a multi-node private blockchain.
+
+# To add another node as peer:
+## admin.addPeer("enode://<address of [NODE-1]>@<NetworkID>:<PORT>")
